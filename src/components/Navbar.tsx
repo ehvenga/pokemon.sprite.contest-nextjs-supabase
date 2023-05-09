@@ -1,6 +1,5 @@
 import Link from 'next/link';
 
-
 const Navbar: React.FC = () => {
   return (
     <nav className='w-full pb-4 text-xl flex justify-center gap-x-5'>

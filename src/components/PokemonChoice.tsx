@@ -4,18 +4,15 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
 
-const PokemonChoice: React.FC<any> = () => {
+const PokemonChoice: React.FC = () => {
   const [pokemonData, setPokemonData] = useState<any>(null);
   const [pokemonSprites, setPokemonSprites] = useState<any[]>([]);
   const [selectedSprite, setSelectedSprite] = useState<string>('');
+  const [disableSelection, setDisableSelection] = useState<boolean>(false);
 
   useEffect(() => {
     if (!selectedSprite) {
       fetchPokemonDetails();
-    } else {
-      setTimeout(() => {
-        fetchPokemonDetails();
-      }, 1000);
     }
   }, [selectedSprite]);
 
@@ -42,10 +39,10 @@ const PokemonChoice: React.FC<any> = () => {
     setPokemonSprites(handleSpriteDetails(data.sprites.versions));
   };
 
-
   const handleChoiceMade = (sprite: any) => {
     const { generationName } = sprite;
     setSelectedSprite(generationName);
+    setDisableSelection(true);
   };
 
   const capitalizeHyphenatedString = (str: string) => {
@@ -68,13 +65,18 @@ const PokemonChoice: React.FC<any> = () => {
     <section className='h-[50svh] flex flex-col justify-evenly'>
       {pokemonData ? (
         <div>
-          <div className='flex justify-center items-center py-4 gap-x-6 cursor-pointer'>
+          <div className='flex justify-center items-center py-4 gap-x-6'>
             {pokemonSprites.map((sprite, idx) => {
               return (
-                <div
-                  className='hover:outline hover:outline-2 hover:outline-offset-4 rounded-md w-32 h-32'
+                <button
+                  className={`hover:outline hover:outline-2 hover:outline-offset-4 rounded-md w-32 h-32 disabled:opacity-50 disabled:outline-none cursor-pointer ${
+                    selectedSprite === sprite?.generationName
+                      ? 'disabled:opacity-100 scale-110'
+                      : 'cursor-default'
+                  }`}
                   key={idx}
                   onClick={() => handleChoiceMade(sprite)}
+                  disabled={disableSelection}
                 >
                   <Image
                     src={sprite?.spriteUrl}
@@ -83,7 +85,7 @@ const PokemonChoice: React.FC<any> = () => {
                     height={128}
                     className='rounded-md'
                   />
-                </div>
+                </button>
               );
             })}
           </div>

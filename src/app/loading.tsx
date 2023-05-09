@@ -1,7 +1,4 @@
-import Header from '@/components/Header';
-import Navbar from '@/components/Navbar';
-
-const Loading: React.FC = () => {
+const loading: React.FC = ({}) => {
   return (
     <section>
       <div className='w-full text-center'>Loading...</div>
@@ -9,4 +6,4 @@ const Loading: React.FC = () => {
   );
 };
 
-export default Loading;
+export default loading;
