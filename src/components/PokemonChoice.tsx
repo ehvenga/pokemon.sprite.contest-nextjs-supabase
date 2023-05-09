@@ -62,17 +62,17 @@ const PokemonChoice: React.FC = () => {
   };
 
   return (
-    <section className='h-[50svh] flex flex-col justify-evenly'>
+    <section className='h-[30svh] flex flex-col justify-center'>
       {pokemonData ? (
         <div>
           <div className='flex justify-center items-center py-4 gap-x-6'>
             {pokemonSprites.map((sprite, idx) => {
               return (
                 <button
-                  className={`hover:outline hover:outline-2 hover:outline-offset-4 rounded-md w-32 h-32 disabled:opacity-50 disabled:outline-none cursor-pointer ${
+                  className={`hover:outline hover:outline-2 hover:outline-offset-4 rounded-lg w-32 h-32 disabled:outline-none cursor-pointer shadow-md ${
                     selectedSprite === sprite?.generationName
                       ? 'disabled:opacity-100 scale-110'
-                      : 'cursor-default'
+                      : 'disabled:opacity-50 cursor-default'
                   }`}
                   key={idx}
                   onClick={() => handleChoiceMade(sprite)}
@@ -89,18 +89,18 @@ const PokemonChoice: React.FC = () => {
               );
             })}
           </div>
-          <div className='w-full text-center capitalize mt-12 text-xl font-medium'>
+          <div className='w-full text-center capitalize mt-12 text-2xl font-medium text-sky-900 dark:text-white'>
             {pokemonData?.name}{' '}
-            <span className='text-lg font-normal ml-2'>
+            <span className='text-lg font-normal ml-2 text-sky-600 dark:text-sky-500'>
               #{pokemonData?.order}
             </span>
           </div>
           {selectedSprite ? (
-            <div className='w-full text-center font-medium h-8'>
+            <div className='w-full text-center font-medium h-8 '>
               You chose {capitalizeHyphenatedString(selectedSprite)}
             </div>
           ) : (
-            <div className='w-full text-center font-medium h-8'> </div>
+            <div className='w-full text-center font-medium h-8'></div>
           )}
         </div>
       ) : null}
