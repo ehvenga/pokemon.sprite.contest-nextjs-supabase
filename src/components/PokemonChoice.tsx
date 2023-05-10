@@ -86,7 +86,7 @@ const PokemonChoice: React.FC = () => {
                     alt='pokemon'
                     width={144}
                     height={144}
-                    className='rounded-md'
+                    className='rounded-lg'
                   />
                 </button>
               );
