@@ -1,11 +1,13 @@
 import PokemonChoice from '@/components/PokemonChoice';
 
+export const metadata = {
+  title: 'Pokémon Sprite Contest | Poll',
+  description: 'To find out the best sprites in Pokemon games',
+};
+
 export default async function Home() {
   return (
-    <main className='mt-20'>
-      <h2 className='w-full text-center text-2xl mt-5 pb-2 font-light text-sky-900 dark:text-sky-100'>
-        Choose the best looking sprite
-      </h2>
+    <main>
       <PokemonChoice />
     </main>
   );
