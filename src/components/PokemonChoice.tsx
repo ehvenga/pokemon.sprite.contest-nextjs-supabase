@@ -72,7 +72,7 @@ const PokemonChoice: React.FC = () => {
             {pokemonSprites.map((sprite, idx) => {
               return (
                 <button
-                  className={`hover:outline hover:outline-2 hover:outline-offset-4 rounded-lg w-28 h-28 2xl:w-36 2xl:h-36 disabled:outline-none cursor-pointer shadow-pokemon shadow-gray-400 dark:shadow-sky-100 ${
+                  className={`hover:outline hover:outline-2 hover:outline-offset-4 rounded-lg w-28 h-28 2xl:w-36 2xl:h-36 disabled:outline-none cursor-pointer ${
                     selectedSprite === sprite?.generationName
                       ? 'disabled:opacity-100 scale-110'
                       : 'disabled:opacity-50 cursor-default'
@@ -99,7 +99,7 @@ const PokemonChoice: React.FC = () => {
             </span>
           </div>
           {selectedSprite ? (
-            <div className='w-full text-center font-medium h-4'>
+            <div className='w-full text-center font-medium text-xl h-4'>
               You chose {capitalizeHyphenatedString(selectedSprite)}
             </div>
           ) : (
