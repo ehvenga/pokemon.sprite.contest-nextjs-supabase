@@ -3,9 +3,12 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
+import supabase from '../../client';
 
 const PokemonChoice: React.FC = () => {
   const [pokemonData, setPokemonData] = useState<any>(null);
+  const [pokemonName, setPokemonName] = useState<string>('');
+  const [pokemonId, setPokemonId] = useState<number | null>(null);
   const [pokemonSprites, setPokemonSprites] = useState<any[]>([]);
   const [selectedSprite, setSelectedSprite] = useState<string>('');
   const [disableSelection, setDisableSelection] = useState<boolean>(false);
@@ -13,8 +16,28 @@ const PokemonChoice: React.FC = () => {
   useEffect(() => {
     if (!selectedSprite) {
       fetchPokemonDetails();
+    } else {
+      handleSavePollChoice();
+      setTimeout(() => {
+        setSelectedSprite('');
+        setDisableSelection(false);
+      }, 2500);
     }
+    console.log('selectedSprite', selectedSprite);
   }, [selectedSprite]);
+
+  const handleSavePollChoice = async () => {
+    const { data, error } = await supabase
+      .from('votes')
+      .insert([
+        {
+          pokemon_name: pokemonName,
+          pokemon_id: pokemonId,
+          chosen_generation: selectedSprite,
+        },
+      ])
+      .select();
+  };
 
   const handleSpriteDetails = (pokemonData: any[]) => {
     const arr = [];
@@ -36,11 +59,14 @@ const PokemonChoice: React.FC = () => {
       `https://pokeapi.co/api/v2/pokemon/${Math.floor(Math.random() * 800) + 1}`
     );
     setPokemonData(data);
+    setPokemonName(data.name);
+    setPokemonId(data.id);
     setPokemonSprites(handleSpriteDetails(data.sprites.versions));
   };
 
   const handleChoiceMade = (sprite: any) => {
     const { generationName } = sprite;
+    console.log('sprite', sprite);
     setSelectedSprite(generationName);
     setDisableSelection(true);
   };

@@ -2,6 +2,11 @@ import Header from '@/components/Header';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
+export const metadata = {
+  title: 'Pokémon Sprite Contest | Poll',
+  description: 'To find out the best sprites in Pokemon games',
+};
+
 const Template = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className='min-h-[100svh] pt-12 pb-6 2xl:pt-18 2xl:pb-8 flex flex-col justify-between'>
