@@ -19,7 +19,7 @@ interface VoteData {
 
 const VoteBarChart: React.FC<{ data: VoteData[] }> = ({ data }) => {
   return (
-    <BarChart width={400} height={400} data={data}>
+    <BarChart width={600} height={400} data={data}>
       <CartesianGrid strokeDasharray='3 3' />
       <XAxis dataKey='chosen_generation' />
       <YAxis />
